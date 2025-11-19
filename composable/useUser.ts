@@ -10,6 +10,7 @@ export interface User {
   links?: string;
   city?: string;
   state?: string;
+  userid?: string;
 }
 
 export const useUser = () => useState<User | null>("user", () => null);

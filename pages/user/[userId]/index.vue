@@ -4,15 +4,25 @@ import { useUser } from "~/composable/useUser";
 import { createNewProject } from "~/store/create.store";
 import UploadFile from "~/components/UploadFile.vue";
 import { EditProfile } from "#components";
+import { useProjects } from "~/composable/useProjects";
+import { onMounted } from 'vue'
+
+const { projects, getMyProjects } = useProjects()
 const user = useUser();
 const menu = ref(false);
 const upload = ref(false);
 const showUploadFile = ref(false);
 const edit = ref(false)
 
+const userId = localStorage.getItem("user")?.split("|")[1];
 const links = computed(() => {
   return JSON.parse(user?.value?.links ?? '{}');
 })
+
+onMounted(() => {
+  getMyProjects(userId||'')
+})
+
 
 </script>
 
@@ -55,7 +65,7 @@ const links = computed(() => {
       </div>
       <div class="flex max-sm:hidden">
         <div class="text-center px-4 py-3 border-b-2 border-blue-400">
-          <div class="font-medium">20</div>
+          <div class="font-medium">{{projects?.length}}</div>
           <div class="text-sm">Components</div>
         </div>
 
@@ -88,41 +98,14 @@ const links = computed(() => {
 
     <div class="text-xl mt-4 font-bold">My components</div>
     <div class="grid gap-4 mt-4 grid-cols-4 max-sm:grid-cols-2">
-      <div>
+      <NuxtLink :to="`/components/${project.id}`" v-for="project in projects" :key="project.id" class="cursor-pointer">
         <div class="h-[180px] bg-gray-200 rounded"></div>
-        <div class="flex justify-between text-sm mt-2">
-          <div>belalnaim9</div>
-          <div class="text-gray-400">228 views</div>
+        <div class="flex text-sm mt-2">
+          <div>{{project.name}}</div>
         </div>
-      </div>
-      <div>
-        <div class="h-[180px] bg-gray-200 rounded"></div>
-        <div class="flex justify-between text-sm mt-2">
-          <div>belalnaim9</div>
-          <div class="text-gray-400">228 views</div>
-        </div>
-      </div>
-      <div>
-        <div class="h-[180px] bg-gray-200 rounded"></div>
-        <div class="flex justify-between text-sm mt-2">
-          <div>belalnaim9</div>
-          <div class="text-gray-400">228 views</div>
-        </div>
-      </div>
-      <div>
-        <div class="h-[180px] bg-gray-200 rounded"></div>
-        <div class="flex justify-between text-sm mt-2">
-          <div>belalnaim9</div>
-          <div class="text-gray-400">228 views</div>
-        </div>
-      </div>
-      <div>
-        <div class="h-[180px] bg-gray-200 rounded"></div>
-        <div class="flex justify-between text-sm mt-2">
-          <div>belalnaim9</div>
-          <div class="text-gray-400">228 views</div>
-        </div>
-      </div>
+      </NuxtLink>
+
     </div>
   </div>
 </template>
+
