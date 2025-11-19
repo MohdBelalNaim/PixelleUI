@@ -17,7 +17,10 @@ export function useRegister(event: Event) {
     method: "post",
     body: JSON.stringify({ ...data, id: uuidv4() }),
   })
-    .then((res) => res.json())
+    .then((res) => {
+      console.log(res)
+      return res.json()
+    })
     .then((data) => {
       if (data?.success) {
         showAlert(data.success);
