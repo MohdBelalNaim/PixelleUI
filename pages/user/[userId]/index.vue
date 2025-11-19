@@ -28,11 +28,11 @@ const links = computed(() => {
     </div>
     <div class="bg-gray-900 flex-col flex items-center gap-y-2 p-6">
       <div class="text-xl font-medium mt-[54px]">{{ user?.name }}</div>
-      <div class="text-sm text-gray-300">Bangalore, India</div>
+      <div v-if="user?.city && user?.state" class="text-sm text-gray-300">{{ user?.city }}, {{ user?.state }}</div>
       <div v-if="user?.bio" class="w-[50%] max-sm:w-[100%] max-sm:text-justify text-center text-sm">
         {{ user?.bio }}
       </div>
-      <div class="flex mt-4">
+      <div class="flex mt-4 gap-3">
         <div v-for="(url, platform) in links">
           <a class="mr-2" v-if="['linkedin', 'instagram', 'twitter'].includes(String(platform)) && url != ''"
             :href="url">
