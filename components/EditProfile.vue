@@ -8,7 +8,6 @@ const activeTab = ref("basics");
 const tabs = [
     { name: "basics", component: EditProfileBasicDetails },
     { name: "password", component: EditProfileChangePassword },
-    { name: "photo", component: EditProfileEditPhoto },
     { name: "links", component: EditProfileLinks },
 ];
 
@@ -35,13 +34,7 @@ const currentComponent = computed(() => {
                             class="flex items-center gap-2 text-[14px] px-3 py-3 cursor-pointer hover:bg-gray-900">
                             <Icon name="ri:links-fill" class="size-5" style="color: white" /> Links
                         </div>
-                        <div @click="activeTab = 'photo'" class=" flex items-center gap-2 text-[14px] px-3 py-3
-                            cursor-pointer hover:bg-gray-900">
-                            <Icon name="material-symbols:add-photo-alternate-outline" class="size-5"
-                                style="color: white" />
-                            Update
-                            photo
-                        </div>
+                    
                         <div @click="activeTab = 'password'"
                             class="flex items-center gap-2 text-[14px] px-3 py-3 cursor-pointer hover:bg-gray-900">
                             <Icon name="ic:sharp-password" class="size-5" style="color: white" /> Change password
