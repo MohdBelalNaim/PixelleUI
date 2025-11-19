@@ -31,7 +31,7 @@ const isPasswordValid = computed(() => {
 
         <div class="input-group">
           <label for="">Full name</label>
-          <input type="text" placeholder="John Doe" name="fullname" required />
+          <input type="text" placeholder="John Doe" name="name" required />
         </div>
 
         <div class="input-group">
