@@ -2,6 +2,8 @@
 import { EditProfileChangePassword, EditProfileEditPhoto, EditProfileLinks } from "#components";
 import { ref } from "vue";
 import EditProfileBasicDetails from "~/components/EditProfile/BasicDetails.vue"
+import { logout } from '~/composable/useAuth';
+
 const modelValue = defineModel({ default: false });
 
 const activeTab = ref("basics");
@@ -14,6 +16,10 @@ const tabs = [
 const currentComponent = computed(() => {
     return tabs.find((tab) => tab.name === activeTab.value)?.component || null;
 });
+
+function handleLogout() {
+    logout();
+}
 </script>
 
 <template>
@@ -42,7 +48,8 @@ const currentComponent = computed(() => {
                     </div>
 
                     <div
-                        class="flex items-center gap-2 text-[14px] text-red-500 px-3 py-2 cursor-pointer hover:bg-gray-900">
+                        class="flex items-center gap-2 text-[14px] text-red-500 px-3 py-2 cursor-pointer hover:bg-gray-900"
+                        @click="handleLogout">
                         <Icon name="mynaui:power-solid" style="color: red" />
                         Logout
                     </div>

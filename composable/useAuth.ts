@@ -52,4 +52,5 @@ export function logout() {
   const user = useUser();
   localStorage.clear();
   user.value = null;
+  window.location.href = '/auth';
 }
