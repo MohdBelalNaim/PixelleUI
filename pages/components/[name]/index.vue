@@ -58,29 +58,15 @@ onMounted(loadText);
   <div class="wrapper">
     <section class="tab-container code-container">
       <header>
-        <button
-          v-if="getProject"
-          v-for="tab in getProject?.files.split(',')"
-          @click="selectedTab = tab"
-          :class="{ active: selectedTab === tab }"
-        >
-          <img
-            :src="`/icons/${getIcon(tab)}.svg`"
-            :alt="tab + 'logo'"
-            width="16"
-          />
+        <button v-if="getProject" v-for="tab in getProject?.files.split(',')" @click="selectedTab = tab"
+          :class="{ active: selectedTab === tab }">
+          <img :src="`/icons/${getIcon(tab)}.svg`" :alt="tab + 'logo'" width="16" />
           {{ tab }}
         </button>
       </header>
       <div class="relative">
-        <VCodeBlock
-          code-block-radius="0"
-          :code="code"
-          :lang="getIcon(selectedTab)"
-          highlightjs
-          :css-path="import('~/assets/css/shades-of-purple.css')"
-          theme="false"
-        />
+        <VCodeBlock code-block-radius="0" :code="code" :lang="getIcon(selectedTab)" highlightjs
+          :css-path="import('~/assets/css/shades-of-purple.css')" theme="false" />
         <CopyButton :text="code" />
       </div>
     </section>
@@ -88,27 +74,21 @@ onMounted(loadText);
     <!-- output panel -->
     <section class="tab-container output">
       <header class="h-9 px-1">
-        <NuxtLink
-          v-if="user?.id == getProject?.userid"
-          :to="`/create/${getProject?.id}`"
-          class="icon-btn mr-8"
-        >
+        <NuxtLink v-if="user?.id == getProject?.userid" :to="`/create/${getProject?.id}`" class="icon-btn mr-8">
           <img src="/icons/desktop.svg" class="w-5 invert" />
           <span>Edit</span>
         </NuxtLink>
-
+        <div class="border text-xs px-4 py-1 rounded-full cursor-pointer flex items-center gap-2 bg-white text-black">
+          <img src="https://cdn-icons-png.flaticon.com/512/16921/16921758.png" class="w-5" alt="react icon" />
+          <span class="">React component</span>
+        </div>
         <NuxtLink :to="'/user/' + getProject?.userid" class="user">
           <img :src="getProject?.picture" alt="user avater" />
           <span>{{ getProject?.user }}</span>
         </NuxtLink>
       </header>
-      <iframe
-        id="frame"
-        :src="`${FILE_URL}${name}/index.html`"
-        frameborder="0"
-        class="border-l border-slate-800 max-sm:aspect-square"
-        allow="camera"
-      ></iframe>
+      <iframe id="frame" :src="`${FILE_URL}${name}/index.html`" frameborder="0"
+        class="border-l border-slate-800 max-sm:aspect-square" allow="camera"></iframe>
     </section>
   </div>
 </template>
