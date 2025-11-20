@@ -4,7 +4,7 @@ import { useUser } from "~/composable/useUser";
 import { createNewProject } from "~/store/create.store";
 import UploadFile from "~/components/UploadFile.vue";
 import { EditProfile } from "#components";
-import { useProjects } from "~/composable/useProjects";
+import { useProjects, type Project } from "~/composable/useProjects";
 import { onMounted } from 'vue'
 
 const { projects, getMyProjects } = useProjects()
@@ -22,7 +22,12 @@ const links = computed(() => {
 onMounted(() => {
   getMyProjects(userId||'')
 })
-
+const combinedPreview = (project:Project) => {
+  return `
+    <style>${project.style_css || ""}</style>
+    ${project.index_html || ""}
+  `;
+};
 
 </script>
 
@@ -99,7 +104,9 @@ onMounted(() => {
     <div class="text-xl mt-4 font-bold">My components</div>
     <div class="grid gap-4 mt-4 grid-cols-4 max-sm:grid-cols-2">
       <NuxtLink :to="`/components/${project.id}`" v-for="project in projects" :key="project.id" class="cursor-pointer">
-        <div class="h-[180px] bg-gray-200 rounded"></div>
+        <div class="h-[180px] bg-white rounded overflow-hidden border border-gray-200">
+          <iframe :srcdoc="combinedPreview(project)" class="w-full h-full border-0 pointer-events-none"></iframe>
+        </div>
         <div class="flex text-sm mt-2">
           <div>{{project.name}}</div>
         </div>
