@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useTitle } from "~/composable/useTitle";
-import { FILE_URL } from "~/composable/useURLs";
+import { API_URL, FILE_URL } from "~/composable/useURLs";
 import { useProjects } from "~/store/projects.store";
 import VCodeBlock from "@wdns/vue-code-block";
 import type { IProject } from "~/store/projects.interface";
@@ -18,6 +18,7 @@ const { name } = route.params;
 
 const title = useTitle();
 const selectedTab = ref<string>("index.html");
+const fileData = ref<any>(null);
 const code = ref("");
 
 const getProject = ref<IProject>();
@@ -35,6 +36,7 @@ watch(
 );
 
 function loadText() {
+
   fetch(`${FILE_URL}${name}/${selectedTab.value}`, {
     cache: "no-store",
   })
@@ -50,11 +52,31 @@ function getIcon(tab: string) {
   else return "javascript";
 }
 
+function loadFile() {
+  fetch(API_URL + 'codebyid/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ id: name })
+  })
+    .then(res => res.json())
+    .then(data => {
+      fileData.value = data; 
+      console.log("Saved:", fileData.value);
+    })
+    .catch(err => console.error(err));
+}
+
 watch(selectedTab, loadText);
 
-onMounted(loadText);
+onMounted(() => {
+  loadText();
+  loadFile();
+});
 </script>
 <template>
+  {{ fileData }}
   <div class="wrapper">
     <section class="tab-container code-container">
       <header>
@@ -80,7 +102,7 @@ onMounted(loadText);
         </NuxtLink>
         <div class="border text-xs px-4 py-1 rounded-full cursor-pointer flex items-center gap-2 bg-white text-black">
           <img src="https://cdn-icons-png.flaticon.com/512/16921/16921758.png" class="w-5" alt="react icon" />
-          <span class="">React component</span>
+          <span class="">Download React component</span>
         </div>
         <NuxtLink :to="'/user/' + getProject?.userid" class="user">
           <img :src="getProject?.picture" alt="user avater" />
@@ -121,6 +143,7 @@ header button {
   .wrapper {
     grid-template-columns: 1fr;
   }
+
   .output {
     grid-row-start: 1;
   }
