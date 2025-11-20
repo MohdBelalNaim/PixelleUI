@@ -85,7 +85,6 @@ const features = [
       </div>
     </div>
   </div>
-  <div class="h-dvh"></div>
 </template>
 
 <style></style>
