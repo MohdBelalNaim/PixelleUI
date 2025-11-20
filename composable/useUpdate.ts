@@ -50,8 +50,20 @@ export function updateBasicDetails(event: Event) {
     body: JSON.stringify({ ...data }),
   })
     .then((res) => res.json())
-    .then((data) => {
-      if (data.success) showAlert(data.success);
-      else showAlert(data.error, "error");
+    .then((response) => {
+      if (response.success) {
+        showAlert(response.success);
+        if (user.value) {
+          user.value = {
+            ...user.value,
+            name: data.name as string,
+            city: data.city as string,
+            state: data.state as string,
+            bio: data.bio as string
+          };
+        }
+      } else {
+        showAlert(response.error, "error");
+      }
     });
 }
