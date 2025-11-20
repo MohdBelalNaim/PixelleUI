@@ -8,6 +8,8 @@ export interface Project {
   name: string;
   tags: string;
   visibility: string;
+  index_html?: string | null;
+  style_css?: string | null;
 }
 
 export interface ProjectsResponse {
@@ -29,7 +31,7 @@ export function useProjects() {
       });
 
       const data = (await res.json()) as ProjectsResponse;
-
+      console.log(data)
       projects.value = data.success || [];
     },
   };
