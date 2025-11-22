@@ -36,9 +36,18 @@ export function updateLinks(event: Event) {
     body: JSON.stringify({ email: data?.email, links: linksTostore }),
   })
     .then((res) => res.json())
-    .then((data) => {
-      if (data.success) showAlert(data.success);
-      else showAlert(data.error, "error");
+    .then((response) => {
+      if (response.success) {
+        showAlert(response.success);
+        if (user.value) {
+          user.value = {
+            ...user.value,
+            links: linksTostore
+          };
+        }
+      } else {
+        showAlert(response.error, "error");
+      }
     });
 }
 export function updateBasicDetails(event: Event) {
