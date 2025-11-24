@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=
+    , initial-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      * {
+        font-family: "Bahnschrift light";
+      }
+      #main {
+        width: 200px;
+        height: 200px;
+        perspective: 600px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      #cubes {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        transform-style: preserve-3d;
+        transform: translateZ(-100px);
+        animation: animate 6s linear infinite;
+        transition: transform 1s;
+      }
+
+      .box {
+        width: 200px;
+        height: 200px;
+        border: 2px solid black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 48px;
+        position: absolute;
+      }
+
+      .front {
+        background: rgba(255, 0, 0, 0.5);
+        transform: rotateY(0deg) translateZ(100px);
+      }
+      .right {
+        background: rgba(0, 255, 0, 0.5);
+        transform: rotateY(90deg) translateZ(100px);
+      }
+      .back {
+        background: rgba(0, 0, 255, 0.5);
+        transform: rotateY(180deg) translateZ(100px);
+      }
+      .left {
+        background: rgba(255, 255, 0, 0.5);
+        transform: rotateY(-90deg) translateZ(100px);
+      }
+      .top {
+        background: rgba(255, 0, 255, 0.5);
+        transform: rotateX(90deg) translateZ(100px);
+      }
+      .bottom {
+        background: rgba(0, 255, 255, 0.5);
+        transform: rotateX(-90deg) translateZ(100px);
+      }
+
+      @keyframes animate {
+        0% {
+          transform: rotateY(0deg);
+        }
+        20% {
+          transform: rotateY(-90deg);
+        }
+        40% {
+          transform: rotateY(-180deg);
+        }
+        60% {
+          transform: rotateY(-270deg);
+        }
+        80% {
+          transform: rotateX(90deg);
+        }
+        100% {
+          transform: rotateX(270deg);
+        }
+      }
+
+      h1 {
+        text-align: center;
+        position: relative;
+        top: 30px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="main">
+      <div id="cubes">
+        <div class="box front">Front</div>
+        <div class="box right">Right</div>
+        <div class="box back">back</div>
+        <div class="box left">Left</div>
+        <div class="box top">Top</div>
+        <div class="box bottom">Bottom</div>
+      </div>
+    </div>
+  </body>
+</html>
