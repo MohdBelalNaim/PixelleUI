@@ -67,6 +67,13 @@ export default defineNuxtConfig({
     clientId:
       "276628044331-2288qcmck1jskicaun6gfm8pk5nh3q1m.apps.googleusercontent.com",
   },
+  runtimeConfig: {
+    public: {
+      awsAccessKeyId: process.env.AWS_ACCESS_KEY_ID,
+      awsSecretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+      awsRegion: process.env.AWS_REGION || 'us-east-1',
+    },
+  },
   tailwindcss: {
     exposeConfig: true,
   },
