@@ -1,0 +1,26 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    background-color: #030712;
+    display: grid;
+    place-items: center;
+    color: whitesmoke;
+}
+
+button {
+    color: aliceblue;
+    cursor: pointer;
+    background-color: #4845d2;
+    padding: 8px 16px;
+    border: 0;
+    border-radius: 4px;
+    transition: 0.3s ease;
+}
