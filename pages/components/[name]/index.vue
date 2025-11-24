@@ -62,7 +62,7 @@ watch(
   [projects, route.params],
   () => {
     if (projects.value) {
-      let project = projects.value.find((p) => p.id == name);
+      let project = projects?.value.find((p) => p?.id == name);
       title.value = project?.name;
       getProject.value = project;
     }
@@ -108,7 +108,6 @@ onMounted(() => {
 });
 </script>
 <template>
-  {{ fileData.project.index_html }}
   <div class="wrapper">
     <section class="tab-container code-container">
       <header>
