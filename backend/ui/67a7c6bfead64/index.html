@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Cursor follow animation</title>
+    <style>
+        body{
+            background: rgb(64, 102, 141);
+            margin: 0;
+        }
+    #box{
+        position: absolute;
+        top:50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        text-align: center;
+        display: flex;
+    }
+    .eye{
+        width:240px;
+        height: 120px;
+        background: #fff;
+        margin: 50px;
+        border-radius: 50%;
+        position: relative;
+        overflow: hidden;
+    }
+    .ball{
+        width: 40px;
+        height: 40px;
+        background: #000;
+        border-radius: 50%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        border:10px solid gray;
+    }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <div class="eye">
+            <div class="ball"></div>
+        </div>
+        <div class="eye">
+                <div class="ball"></div>
+        </div>
+    </div>
+
+    <script>
+        let ball = document.getElementsByClassName('ball');
+        window.onmousemove = function(event){
+            let x = event.clientX*100/window.innerWidth+"%";
+            let y = event.clientY*100/window.innerHeight+"%";
+            for(let i=0;i<2;i++){
+                ball[i].style.top=y;
+                ball[i].style.left=x;
+                ball[i].style.transform = "translate(-"+x+",-"+y+")";
+            }
+        }
+    </script>
+</body>
+</html>
