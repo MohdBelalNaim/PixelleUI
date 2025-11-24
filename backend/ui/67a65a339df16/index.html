@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background: #333;
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+        }
+
+        .box{
+            width: 280px;
+            background: #fff;
+            display: grid;
+            place-items: center;
+            padding: 16px;
+            border-radius: 4px;
+        }
+
+        /* p{
+            --max-lines: 3;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: var(--max-lines);
+            margin-bottom: 12px;
+        } */
+        
+        /* alternative */
+        p{
+            --max-lines: 3;
+            overflow: hidden;
+            --line-height: 1.2em;
+            line-height: 1.2em;
+            max-height: calc(var(--max-lines) * var(--line-height));
+            margin-bottom: 12px;
+            transition: 0.25s ease-in-out;
+        }        
+        
+        .box:has(input:checked) p{
+            /* display: block; */
+            max-height: 200px; 
+            /* or max-height: none */
+        }
+
+        input{
+            appearance: none;
+            border: 1px solid black;
+            width: 100%;
+            text-align: center;
+            padding: 8px 0;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: 0.25s;
+        }
+
+        input:hover{
+            background: #ccc;
+        }
+
+        input::before{
+            content: "Show more";
+        }
+
+        input:checked:before{
+            content: "Show less";
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae in ad veritatis cumque ipsum, eaque harum? Nisi, quam ipsa enim dicta similique tempore? Laborum, quis minus. Quam tenetur blanditiis repellendus.</p>
+        <input type="checkbox">
+    </div>
+</body>
+</html>
