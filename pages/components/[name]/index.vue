@@ -5,6 +5,7 @@ import { useProjects } from "~/store/projects.store";
 import VCodeBlock from "@wdns/vue-code-block";
 import type { IProject } from "~/store/projects.interface";
 import { useUser } from "~/composable/useUser";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 definePageMeta({
   layout: "custom",
@@ -23,11 +24,45 @@ const code = ref("");
 
 const getProject = ref<IProject>();
 
+async function callGemini() {
+  const genAI = new GoogleGenerativeAI("AIzaSyBQnClbZaVx6oi3RycXbFttZ86qBytbZEM");
+
+  const model = genAI.getGenerativeModel({
+    model: "models/gemini-2.5-flash"
+  });
+
+  const html = fileData.value.project.index_html || "";
+  const css = fileData.value.project.style_css || "";
+
+  const prompt = `
+Convert the following HTML and CSS into a standalone React component.
+
+Requirements:
+- Return ONLY the React component code.
+- Do NOT add explanations.
+- Do NOT use markdown fences.
+- Use a functional React component named GeneratedComponent.
+- Merge all CSS into the component using inline styles or styled-components.
+
+HTML:
+${html}
+
+CSS:
+${css}
+`;
+
+  const result = await model.generateContent(prompt);
+  const text = result.response.text();
+
+  console.log("React Component Output:\n", text);
+
+}
+
 watch(
   [projects, route.params],
   () => {
     if (projects.value) {
-      let project = projects.value.find((p) => p.id == name);
+      let project = projects?.value.find((p) => p?.id == name);
       title.value = project?.name;
       getProject.value = project;
     }
@@ -36,7 +71,6 @@ watch(
 );
 
 function loadText() {
-
   fetch(`${FILE_URL}${name}/${selectedTab.value}`, {
     cache: "no-store",
   })
@@ -52,31 +86,28 @@ function getIcon(tab: string) {
   else return "javascript";
 }
 
-function loadFile() {
-  fetch(API_URL + 'codebyid/', {
+async function loadFile() {
+  const res = await fetch(API_URL + 'codebyid/', {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ id: name })
-  })
-    .then(res => res.json())
-    .then(data => {
-      fileData.value = data; 
-      console.log("Saved:", fileData.value);
-    })
-    .catch(err => console.error(err));
+  });
+
+  fileData.value = await res.json();
+  console.log("Saved:", fileData.value);
+
+  // ✅ CALL GEMINI SAFELY NOW (fileData exists)
+  callGemini();
 }
 
 watch(selectedTab, loadText);
 
 onMounted(() => {
   loadText();
-  loadFile();
+  loadFile(); // callGemini happens inside loadFile()
 });
 </script>
 <template>
-  {{ fileData }}
   <div class="wrapper">
     <section class="tab-container code-container">
       <header>
