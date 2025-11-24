@@ -102,7 +102,7 @@ const combinedPreview = (project:Project) => {
     </div>
 
     <div class="text-xl mt-4 font-bold">My components</div>
-    <div class="grid gap-4 mt-4 grid-cols-4 max-sm:grid-cols-2">
+    <div v-if="projects && projects.length > 0" class="grid gap-4 mt-4 grid-cols-4 max-sm:grid-cols-2">
       <NuxtLink :to="`/components/${project.id}`" v-for="project in projects" :key="project.id" class="cursor-pointer">
         <div class="h-[180px] bg-white rounded overflow-hidden border border-gray-200">
           <iframe :srcdoc="combinedPreview(project)" class="w-full h-full border-0 pointer-events-none"></iframe>
@@ -111,7 +111,13 @@ const combinedPreview = (project:Project) => {
           <div>{{project.name}}</div>
         </div>
       </NuxtLink>
-
+    </div>
+    <div v-else class="text-center pt-24 pb-12 text-gray-400">
+      <p class="text-lg">No components to show</p>
+      <p class="text-base mt-2">Create your first component to get started!</p>
+    <button @click="createNewProject" class="mx-auto block mt-4 inline-flex items-center gap-2 bg-gray-900 text-white px-4 py-2 rounded-full border border-white hover:bg-gray-800">
+        Create
+      </button>
     </div>
   </div>
 </template>
