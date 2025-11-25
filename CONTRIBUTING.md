@@ -48,9 +48,6 @@ Make sure you have the following installed:
    AWS_SECRET_ACCESS_KEY=your_aws_secret_key
    AWS_REGION=us-east-1
    
-   # Google OAuth
-   GOOGLE_CLIENT_ID=your_google_client_id
-   
    # Development API URLs
    API_URL=http://localhost/pixelle/api/
    FILE_URL=http://localhost/pixelle/ui/
@@ -247,119 +244,19 @@ Related to #456
 ## Additional Notes
 Any additional information for reviewers
 ```
-- [ ] Breaking change (fix or feature that would cause existing functionality to not work as expected)
-- [ ] Documentation update
- 
-## Related Issues
-Closes #123
-Related to #456
- 
-## Testing
-- [ ] Frontend builds without errors
-- [ ] Backend API endpoints tested
-- [ ] Database changes verified
-- [ ] Cross-browser testing completed
-- [ ] Mobile responsive testing completed
- 
-## Screenshots
-[If applicable, add screenshots or GIFs]
- 
-## Additional Notes
-Any additional information for reviewers
-```
- 
-## 📋 Development Guidelines
- 
-### 🎨 Frontend Code Style
- 
-**TypeScript Standards:**
-- Use **TypeScript** for all new code
-- Follow **strict** TypeScript configuration
-- Define proper **interfaces** and **types**
-- Use **type guards** where appropriate
- 
-**Vue.js Standards:**
-- Follow **Vue 3 Composition API** patterns
-- Use `<script setup>` syntax for new components
-- Implement **proper reactivity** with `ref()` and `reactive()`
-- Use **composables** for reusable logic
- 
-**Styling Standards:**
-- Use **Tailwind CSS** for all styling
-- Follow **mobile-first** responsive design
-- Maintain **consistent spacing** using Tailwind's system
-- Use **CSS custom properties** for dynamic values when needed
- 
- 
-### 🔧 Backend Code Style  
- 
-**PHP Standards:**
-- Use **PHP 7.4+** features
-- Follow **PSR-12** coding standards
-- Use **prepared statements** for database queries
-- Implement **proper error handling**
- 
- 
-### 🧩 Component Guidelines
- 
-**Component Architecture:**
-- Keep components **focused** and **single-purpose**
-- Make components **reusable** across different contexts
-- Use **meaningful prop names** with proper TypeScript types
-- Implement **proper accessibility** (ARIA labels, keyboard navigation)
- 
-### 📝 Commit Convention
- 
-We follow **[Conventional Commits](https://www.conventionalcommits.org/)**:
- 
-```bash
-# Format: <type>(<scope>): <description>
- 
-# Types:
-feat:      # New features
-fix:       # Bug fixes  
-docs:      # Documentation changes
-style:     # Code formatting (no logic changes)
-refactor:  # Code refactoring
-test:      # Adding tests
-chore:     # Maintenance tasks
-perf:      # Performance improvements
-ci:        # CI/CD changes
- 
-# Examples:
-git commit -m "feat(components): add search functionality to component library"
-git commit -m "fix(api): resolve user authentication timeout issue"  
-git commit -m "docs(readme): update installation instructions"
-git commit -m "style(editor): fix code formatting in editor component"
-```
- 
-### 🧪 Testing Requirements
- 
-**Frontend Testing:**
-- [ ] **Build verification**: `npm run build` succeeds
-- [ ] **Development server**: `npm run dev` runs without errors
-- [ ] **Cross-browser testing**: Chrome, Firefox, Safari, Edge
-- [ ] **Responsive design**: Mobile, tablet, desktop viewports
-- [ ] **Accessibility**: Keyboard navigation, screen readers
-- [ ] **Console errors**: No JavaScript errors in console
- 
-**Backend Testing:**
-- [ ] **API endpoints**: All endpoints return expected responses
-- [ ] **Database operations**: CRUD operations work correctly
-- [ ] **Authentication**: Protected routes enforce permissions
-- [ ] **File handling**: Upload/download functionality works
-- [ ] **Error handling**: Proper error responses and logging
-- [ ] **Security**: SQL injection and XSS protection
- 
-**Integration Testing:**
-- [ ] **Frontend-Backend**: API calls work end-to-end
-- [ ] **User workflows**: Complete user journeys function properly
-- [ ] **File system**: Component files are created and served correctly
- 
- 
-##  Need Help?
+## 📋 Code Standards
+- **Frontend**: Vue 3 + TypeScript + Tailwind CSS
+- **Backend**: PHP 7.4+ with prepared statements
+- **Commits**: Use conventional commits (`feat:`, `fix:`, `docs:`)
+
+## 🧪 Testing Checklist
+- [ ] `npm run build` succeeds
+- [ ] Cross-browser compatibility  
+- [ ] API endpoints work
+- [ ] Mobile responsive
+
+## 🆘 Need Help?
 - [Issues](https://github.com/MohdBelalNaim/PixelleUI/issues) - Bug reports and feature requests
-- [Discussions](https://github.com/MohdBelalNaim/PixelleUI/discussions) - Questions and ideas
  
 ## 📄 License
 By contributing, you agree that your contributions will be licensed under the MIT License.
