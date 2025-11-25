@@ -255,7 +255,7 @@ Any additional information for reviewers
 - [ ] API endpoints work
 - [ ] Mobile responsive
 
-## 🆘 Need Help?
+## Need Help?
 - [Issues](https://github.com/MohdBelalNaim/PixelleUI/issues) - Bug reports and feature requests
  
 ## 📄 License

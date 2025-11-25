@@ -58,4 +58,3 @@ MIT License - see [LICENSE](LICENSE) file.
  
 ##  Support
 - 🐛 [Issues](https://github.com/MohdBelalNaim/PixelleUI/issues)
-- 💡 [Discussions](https://github.com/MohdBelalNaim/PixelleUI/discussions)
